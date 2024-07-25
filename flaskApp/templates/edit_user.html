@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+</head>
+<body>
+    <h1>Edit User</h1>
+    <form action="{{ url_for('edit_user', user_id=user_id) }}" method="post">
+        <label>Username</label>
+        <input type="text" name="username" value="{{ user[0] }}" required>
+        <label>Email</label>
+        <input type="email" name="email" value="{{ user[1] }}" required>
+        <input type="submit" value="Update User">
+    </form>
+    <a href="{{ url_for('user_management') }}">Back to User Management</a>
+</body>
+</html>
