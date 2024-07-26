@@ -149,13 +149,28 @@
 from flask import Flask, request, session, jsonify
 import mysql.connector
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+
 
 # Veritabanı bağlantısı
-connection = mysql.connector.connect(host='localhost', port='3306', database='flaskData', user='root', password='CSGO123abcDf.')
-cursor = connection.cursor()
+# connection = mysql.connector.connect(host='db', port='3306', database='flaskData', user='root', password='CSGO123abcDf.')
+# cursor = connection.cursor()
+
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:CSGO123abcDf.@db:3306/flaskData'
+
+db = SQLAlchemy(app)
 CORS(app, supports_credentials=True)
 app.secret_key = "secret_key"
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    role = db.Column(db.String(80), nullable=False, default='user')
 
 @app.route('/')
 def index():

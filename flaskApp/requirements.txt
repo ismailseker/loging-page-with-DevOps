@@ -1,0 +1,6 @@
+Flask==2.0.3
+mysql-connector-python==8.0.27
+flask-cors==3.0.10
+werkzeug==2.0.3
+flask_sqlalchemy==2.5.1
+SQLAlchemy==1.4.47

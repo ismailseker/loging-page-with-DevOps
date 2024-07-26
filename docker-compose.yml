@@ -1,0 +1,30 @@
+services:
+  flaskapp:
+    build:
+      context: . # Projenizin kök dizini
+      dockerfile: flaskApp/Dockerfile # Flask Dockerfile yolu
+    volumes:
+      - ./flaskApp:/app
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+
+  reactapp:
+    build:
+      context: . # React dizini
+      dockerfile: my-react-app/Dockerfile # React Dockerfile
+    ports:
+      - "3000:3000"
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: CSGO123abcDf.  
+      MYSQL_DATABASE: flaskData
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

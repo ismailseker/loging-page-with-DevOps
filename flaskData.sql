@@ -15,6 +15,7 @@ INSERT INTO users (username, password, email) VALUES ('jane_smith', 'password456
 INSERT INTO users (username, password, email) VALUES ('alice_jones', 'password789', 'alice@example.com');
 
 INSERT INTO users (username, password, email, role) VALUES ('admin_username', 'admin_password', 'admin@example.com', 'admin');
+INSERT INTO users (username, password, email, role) VALUES ('aziz', 'aziz123', 'aziz@example.com', 'admin');
 
 UPDATE users SET password = 'password123' WHERE username = 'john_doe';
 UPDATE users SET password = 'password456' WHERE username = 'jane_smith';
