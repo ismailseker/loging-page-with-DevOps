@@ -10,16 +10,22 @@ services:
     environment:
       - FLASK_APP=app.py
       - FLASK_RUN_HOST=0.0.0.0
+      - SQLALCHEMY_DATABASE_URI=mysql+mysqlconnector://root:CSGO123abcDf.@db:3306/flaskData
+      - SECRET_KEY=secret_key
+    depends_on:
+      - db
+    networks:
+      - my-network
     
-
   reactapp:
     build:
       context: . # React dizini
       dockerfile: my-react-app/Dockerfile # React Dockerfile
     ports:
       - "3000:3000"
+    networks:
+      - my-network
     
-
   db:
     image: mysql:5.7
     environment:
@@ -27,7 +33,12 @@ services:
       MYSQL_DATABASE: flaskData
     volumes:
       - db_data:/var/lib/mysql
-    
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
 
 volumes:
   db_data:

@@ -299,16 +299,20 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, session, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 
 # Veritabanı bağlantısı
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:CSGO123abcDf.@db:3306/flaskData'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:CSGO123abcDf.@db:3306/flaskData'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 CORS(app, supports_credentials=True)
-app.secret_key = "secret_key"
+app.secret_key = os.getenv('SECRET_KEY', 'secret_key')
 
 class User(db.Model):
     __tablename__ = 'users'  
