@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: ismailseker/intern-ismail-seker-flaskapp:latest
+        env:
+        - name: SQLALCHEMY_DATABASE_URI
+          value: mysql+mysqlconnector://root:CSGO123abcDf.@db:3306/flaskData
+        - name: MYSQL_HOST
+          value: "mysql-service" 
+        - name: MYSQL_USER
+          value: "root"
+        - name: MYSQL_PASSWORD
+          value: "CSGO123abcDf."
+        - name: MYSQL_DB
+          value: "flaskData"
+        ports:
+        - containerPort: 5000
+
+
+
